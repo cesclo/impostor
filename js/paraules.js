@@ -1,7 +1,3 @@
-// Paraules en català – actualitzat amb categories ampliades
-// Fitxer fàcil d’editar per a l’administrador
-// ⚠️ Recomanació: minificar en producció
-
 const WORDS_CATALA = {
   animal: [
     "gat", "ocell", "elefant", "ratolí", "serp", "dofí", "pingüí", "camell",
@@ -20,8 +16,8 @@ const WORDS_CATALA = {
   ],
   professio: [
     "metge", "mestra", "cuiner", "policia", "músic", "pintor", "granjer", "bomber",
-    "ferrer", "fuster", "fotògraf", "arquitecte", "advocat", "periodista", "actor",
-    "ballarí", "escriptor", "dentista", "mecànic", "enginyer"
+    "ferrer", "fuster", "fotògraf", "arquitecte", "advocat", "periodista", "actriu",
+    "ballarí", "escriptora", "dentista", "mecànic", "enginyer"
   ],
   ciutat: [
     "Barcelona", "Girona", "Lleida", "Tarragona", "Vic", "Figueres", "Olot", "Ripoll",
