@@ -1,0 +1,12 @@
+# Bloqueja fitxers sensibles
+<Files ~ "\.(json|php|env|md|txt)$">
+  Order allow,deny
+  Deny from all
+</Files>
+
+# Permet només el que cal
+Options -Indexes
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
