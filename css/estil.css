@@ -252,7 +252,7 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  color: var(--color-primari); text-decoration: none; 
+  color: var(--color-primari);
 }
 
 @media (max-width: 400px) {
