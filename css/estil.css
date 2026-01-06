@@ -202,6 +202,15 @@ button:active:not(:disabled) {
   color: var(--color-primari);
 }
 
+.icon-svg {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.125em;
+  display: inline-block;
+  fill: currentColor;
+  pointer-events: none;
+}
+
 /* Final */
 .final {
   text-align: center;
