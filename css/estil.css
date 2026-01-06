@@ -6,7 +6,7 @@
   --color-impostor: #d93025;
   --color-innocent: #1e8e3e;
   --color-text: #202124;
-  --color-text-suau: #5f6368;
+  --color-text-suau: #4d5156;
   --color-borde: #dadce0;
   --color-focus: #8ab4f8;
   --ombra-suau: 0 2px 12px rgba(0,0,0,0.08);
@@ -14,21 +14,31 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--color-fons);
   color: var(--color-text);
   line-height: 1.5;
   padding: 16px;
-  min-height: 100vh;
+  min-height: 100dvh; /* 'd' = dynamic viewport height */
   display: flex;
   flex-direction: column;
+  margin: 0;
+  /* Assegura que el scroll sempre estigui disponible si cal */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* millora el scroll tàctil a iOS */
 }
 
 .container {
   max-width: 500px;
   margin: 0 auto;
   width: 100%;
+  overflow: visible;
 }
 
 .screen { 
@@ -238,8 +248,12 @@ footer {
   font-size: 0.85em;
   color: var(--color-text-suau);
 }
-a { color: var(--color-primari); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  color: var(--color-primari); text-decoration: none; 
+}
 
 @media (max-width: 400px) {
   h1 { font-size: 1.8em; }
