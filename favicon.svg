@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 6 22 22">
+  <!-- Cap (cercle vermell) -->
+  <circle cx="16" cy="12" r="6" fill="#ff4d4d"/>
+  <!-- Cos (rectangle més ample) -->
+  <rect x="7" y="18" width="18" height="10" rx="2" fill="#ff4d4d"/>
+  <!-- Interrogant gris centrat -->
+  <text x="16" y="26" text-anchor="middle" font-size="14" font-family="Arial, sans-serif" fill="#cccccc" font-weight="bold">?</text>
+</svg>
