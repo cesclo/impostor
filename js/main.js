@@ -265,6 +265,6 @@ function novaConfiguracio() {
 }
 
 // Gestió bàsica del viewport mòbil (ajust opcional des d’aquí, però recomanat al HTML)
-document.addEventListener('touchmove', e => {
-  if (e.scale !== 1) e.preventDefault();
-}, { passive: false });
+//document.addEventListener('touchmove', e => {
+//  if (e.scale !== 1) e.preventDefault();
+//}, { passive: false });
