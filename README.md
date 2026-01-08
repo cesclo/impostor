@@ -1,13 +1,13 @@
 # 🕵️ L’impostor
 
-> **Un joc d’engany i deducció – totalment en català, lliure de publicitat, gratuït i sense cap mena de rastreig.**
+> **Un joc d’astúcia i deducció – totalment en català, lliure de publicitat, gratuït i sense cap mena de rastreig.**
 
 Juga amb amics, família o a classe! Trieu una paraula secreta, assigneu rols i comenceu la discussió.  
-Qui és l’**impostor**? Només hi ha una manera de saber-ho: **fer preguntes... sense dir la paraula!**
+Qui és l’**impostor**? Només hi ha una manera de saber-ho: **donar pistes... sense dir la paraula!**
 
 ![L’impostor – Joc social en català](https://impostor.whym.cat/social-preview.jpg)
 
-🔗 **Prova’l ara**: [https://impostor.whym.cat](https://impostor.whym.cat)
+🔗 **Juga-hi**: [https://impostor.whym.cat](https://impostor.whym.cat)
 
 ---
 
