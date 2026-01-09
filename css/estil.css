@@ -1,12 +1,12 @@
 :root {
   --color-fons: #fbfcff;
-  --color-primari: #1a73e8;
+  --color-primari: #073672;
   --color-secundari: #34a853;
   --color-perill: #ea4335;
   --color-impostor: #d93025;
   --color-innocent: #1e8e3e;
   --color-text: #202124;
-  --color-text-suau: #5f6368;
+  --color-text-suau: #070b46;
   --color-borde: #dadce0;
   --color-focus: #8ab4f8;
   --ombra-suau: 0 2px 12px rgba(0,0,0,0.08);
@@ -20,9 +20,11 @@ body {
   color: var(--color-text);
   line-height: 1.5;
   padding: 16px;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -78,7 +80,7 @@ input, select {
   font-size: 1.1em;
   border: 1px solid var(--color-borde);
   border-radius: var(--radi-cantonades);
-  margin: 10px 0;
+  margin: 2px 0;
   background: white;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -202,7 +204,21 @@ button:active:not(:disabled) {
   color: var(--color-primari);
 }
 
-/* Final */
+.icon-svg {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.125em;
+  display: inline-block;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.nom-iniciador {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: var(--color-primari);
+}
+
 .final {
   text-align: center;
   padding: 30px 20px;
@@ -229,8 +245,12 @@ footer {
   font-size: 0.85em;
   color: var(--color-text-suau);
 }
-a { color: var(--color-primari); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  color: var(--color-primari);
+}
 
 @media (max-width: 400px) {
   h1 { font-size: 1.8em; }
@@ -243,8 +263,17 @@ a:hover { text-decoration: underline; }
   }
 }
 
+.dificultat-toggle-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+  flex-direction: row;
+  align-content: center;
+} 
+
 .toggle-container {
   margin-top: 20px;
+  margin-bottom: 26px;
   text-align: left;
 }
 .toggle-label {
@@ -285,4 +314,23 @@ a:hover { text-decoration: underline; }
 }
 .toggle-input:checked + .toggle-switch::before {
   transform: translateX(22px);
+}
+
+.toggle-text {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.05em;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.toggle-text strong {
+  white-space: nowrap;
+}
+
+@media (max-width: 360px) {
+  .toggle-text {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
 }

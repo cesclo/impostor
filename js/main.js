@@ -4,7 +4,7 @@ let impostors = [];
 let indexActual = 0;
 let jocActiu = false;
 let pantallaAnterior = "pantalla1";
-let historialParaules = {}; // ex: { "animal": ["gat", "serp", ...] }
+let historialParaules = {};
 
 const MAX_MEMORIA = 5;
 
@@ -54,62 +54,122 @@ function començarJoc() {
 
 function actualitzarParaulaInput() {
   const sel = document.getElementById("categoria");
-  const input = document.getElementById("paraulaPers");
-  if (sel.value && WORDS_CATALA[sel.value]) {
-    input.value = "";
-    input.placeholder = `S’usarà una paraula de "${sel.options[sel.selectedIndex].text}"`;
+  const paraulaInput = document.getElementById("paraulaPers");
+  const categoriaInput = document.getElementById("categoriaPers");
+  const filtresDiv = document.getElementById("filtresDificultat");
+
+  const valor = sel.value;
+
+  if (valor === "__personalitzat__") {
+    // Mode personalitzat: amaga filtres, mostra inputs
+    filtresDiv.style.display = "none";
+    paraulaInput.style.display = "block";
+    categoriaInput.style.display = "block";
+    paraulaInput.placeholder = "Escriu la paraula secreta...";
+    categoriaInput.placeholder = "(Opcional) Nom de la categoria (ex: 'Animals')";
   } else {
-    input.placeholder = "O escriu una paraula secreta...";
+    // Mode aleatori o categoria concreta: mostra filtres, amaga inputs
+    filtresDiv.style.display = "block";
+    paraulaInput.style.display = "none";
+    categoriaInput.style.display = "none";
+    paraulaInput.value = ""; // neteja si torna enrere
+    categoriaInput.value = "";
+    
+    if (valor === "__aleatori__") {
+      // Cap text específic; es triarà aleatòriament
+    } else {
+      // Categoria concreta seleccionada
+      const nomCat = sel.options[sel.selectedIndex].text;
+      // Opcional: pots deixar un missatge invisible o res
+    }
   }
 }
 
 function prepararRols() {
   const cat = document.getElementById("categoria").value;
   const paraulaPers = document.getElementById("paraulaPers").value.trim();
+  const categoriaPers = document.getElementById("categoriaPers").value.trim();
   const numImpostorsInput = document.getElementById("numImpostors").value;
   const impostorSapCategoria = document.getElementById("impostorSapCategoria").checked;
 
-  // Validar nombre d’impostors
   const numImpostors = Math.min(
     Math.max(parseInt(numImpostorsInput) || 1, 1),
     jugadors.length - 1
   );
 
   let paraulaFinal = "";
-  let categoriaFinal = ""; // això és clau
+  let categoriaFinal = "";
 
-  if (paraulaPers) {
-    // Paraules introduïdes per l'usuari
+  if (cat === "__personalitzat__") {
+    // Mode manual complet
+    if (!paraulaPers) {
+      alert("Has d'escriure una paraula secreta.");
+      return;
+    }
     paraulaFinal = paraulaPers;
-    categoriaFinal = ""; // cap categoria
+    categoriaFinal = categoriaPers || "";
   } else {
-    // Triar categoria (manual o aleatòria)
-    let categoriaTriada = cat;
-    if (!categoriaTriada || !WORDS_CATALA[categoriaTriada]) {
-      const categories = Object.keys(WORDS_CATALA);
-      if (categories.length > 0) {
-        categoriaTriada = categories[Math.floor(Math.random() * categories.length)];
-      } else {
-        paraulaFinal = "error mots";
-        categoriaFinal = "";
+    // Mode basat en WORDS
+    // Pas 1: determinar categories candidates
+    let idsCategoriesCandidates = [];
+    if (cat === "__aleatori__") {
+      // Totes les categories
+      idsCategoriesCandidates = CATEGORIES.map((_, i) => i);
+    } else {
+      // Categoria concreta
+      const idx = CATEGORIES.indexOf(cat);
+      if (idx === -1) {
+        alert("Categoria no vàlida.");
+        return;
       }
+      idsCategoriesCandidates = [idx];
     }
 
-    if (categoriaTriada && WORDS_CATALA[categoriaTriada]) {
-      const llista = WORDS_CATALA[categoriaTriada];
-      const usades = historialParaules[categoriaTriada] || [];
-      let candidates = llista.filter(p => !usades.includes(p));
-      if (candidates.length === 0) {
-        historialParaules[categoriaTriada] = [];
-        candidates = llista;
-      }
-      paraulaFinal = candidates[Math.floor(Math.random() * candidates.length)];
-      historialParaules[categoriaTriada] = [...usades, paraulaFinal].slice(-MAX_MEMORIA);
-      categoriaFinal = categoriaTriada; // ⬅️ AQUÍ es guarda sempre si ve d’una categoria (manual o aleatòria)
-    } else if (!paraulaFinal) {
-      paraulaFinal = "error mots";
-      categoriaFinal = "";
+    // Pas 2: obtenir nivells de dificultat seleccionats (com a índexs)
+    const checkboxes = document.querySelectorAll('#filtresDificultat input[name="dificultat"]:checked');
+    let idsDificultatPermeses = [];
+    checkboxes.forEach(cb => {
+      const val = cb.value;
+      const idx = DIFICULTATS.indexOf(val);
+      if (idx !== -1) idsDificultatPermeses.push(idx);
+    });
+    if (idsDificultatPermeses.length === 0) {
+      idsDificultatPermeses = [0]; // fàcil per defecte
     }
+
+    // Pas 3: filtrar paraules
+    let candidates = WORDS.filter(([paraula, idCat, idDif]) => {
+      return idsCategoriesCandidates.includes(idCat) && idsDificultatPermeses.includes(idDif);
+    });
+
+    if (candidates.length === 0) {
+      // Fallback: sense filtre de dificultat
+      candidates = WORDS.filter(([paraula, idCat, idDif]) => idsCategoriesCandidates.includes(idCat));
+    }
+
+    if (candidates.length === 0) {
+      alert("No hi ha paraules disponibles per a aquesta combinació.");
+      return;
+    }
+
+    // Pas 4: aplicar historial per categoria (optimitzat)
+    // Creem un historial per ID de categoria
+    let paraulaTriada;
+    let intent = 0;
+    do {
+      paraulaTriada = candidates[Math.floor(Math.random() * candidates.length)];
+      const [p, idCat] = paraulaTriada;
+      const clauHist = `cat_${idCat}`;
+      const usades = historialParaules[clauHist] || [];
+      if (!usades.includes(p) || intent > 10) {
+        historialParaules[clauHist] = [...usades, p].slice(-MAX_MEMORIA);
+        break;
+      }
+      intent++;
+    } while (intent < 20);
+
+    paraulaFinal = paraulaTriada[0];
+    categoriaFinal = CATEGORIES[paraulaTriada[1]];
   }
 
   // Assignar globalment
@@ -204,6 +264,12 @@ function següentJugador() {
 
   if (indexActual >= jugadors.length) {
     jocActiu = false;
+
+    // Triar un jugador inicial aleatori
+    const iniciador = jugadors[Math.floor(Math.random() * jugadors.length)];
+    document.getElementById("suggerimentInici").innerHTML = 
+  `💡 Comença: <span class="nom-iniciador">${iniciador}</span>`;
+
     canviarPantalla("pantalla5");
     return;
   }
@@ -227,12 +293,23 @@ function actualitzarInstruccio() {
 }
 
 function canviarPantalla(id) {
+  // Amagar/mostrar el botó de guia segons la pantalla
+  const btnGuia = document.getElementById("btnGuiaFooter");
+  if (btnGuia) {
+    if (id === "pantallaGuia") {
+      btnGuia.style.display = "none";
+    } else {
+      btnGuia.style.display = "inline-block";
+    }
+  }
+
+  // Canviar la pantalla activa
   document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function mostrarGuia() {
-  const pantallaAnterior = document.querySelector('.screen.active').id;
+  pantallaAnterior = document.querySelector('.screen.active').id;
   canviarPantalla("pantallaGuia");
 }
 
@@ -241,30 +318,21 @@ function tornarAPantallaAnterior() {
 }
 
 function novaPartida() {
-  // Ara no anem directament a pantalla1, sinó a una pantalla intermèdia
-  // (has d'afegir aquesta pantalla al teu HTML – veure més avall)
   canviarPantalla("pantallaNovaPartida");
 }
 
 function reutilitzarJugadors() {
-  // Mantenim els jugadors actuals
-  document.getElementById("categoria").value = "";
+  document.getElementById("categoria").value = "__aleatori__";
   document.getElementById("paraulaPers").value = "";
   canviarPantalla("pantalla3");
 }
 
 function novaConfiguracio() {
-  // Reiniciar tot
   jugadors = [];
   jocActiu = false;
-  historialParaules = {}; // Opcional: pots esborrar-ho o mantenir-lo
+  historialParaules = {};
   document.getElementById("numJugadors").value = "5";
-  document.getElementById("categoria").value = "";
+  document.getElementById("categoria").value = "__aleatori__";
   document.getElementById("paraulaPers").value = "";
   canviarPantalla("pantalla1");
 }
-
-// Gestió bàsica del viewport mòbil (ajust opcional des d’aquí, però recomanat al HTML)
-document.addEventListener('touchmove', e => {
-  if (e.scale !== 1) e.preventDefault();
-}, { passive: false });

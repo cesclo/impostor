@@ -1,13 +1,13 @@
 # 🕵️ L’impostor
 
-> **Un joc d’astúcia i deducció – totalment en català, lliure de publicitat, gratuït i sense cap mena de rastreig.**
+> **Un joc d’astúcia i deducció – totalment en català, lliure de publicitat, obert, gratuït i sense cap mena de rastreig.**
 
-Juga amb amics, família o a classe! Trieu una paraula secreta, assigneu rols i comenceu a jugar.  
+Juga amb amics, família o a classe! Trieu una paraula secreta, assigneu rols i comenceu la discussió.  
 Qui és l’**impostor**? Només hi ha una manera de saber-ho: **donar pistes... sense dir la paraula!**
 
 ![L’impostor – Joc social en català](https://impostor.whym.cat/social-preview.jpg)
 
-🔗 **Juga-hi**: [https://impostor.whym.cat](https://impostor.whym.cat)
+🔗 **Prova’l ara**: [https://impostor.whym.cat](https://impostor.whym.cat)
 
 ---
 
@@ -34,6 +34,9 @@ Qui és l’**impostor**? Només hi ha una manera de saber-ho: **donar pistes...
 
 - 🌐 **100% en línia i gratuït** – només necessites un navegador.
 - 📱 **Optimitzat per a mòbil** – perfecte per passar el dispositiu de mà en mà.
+- 🔒 **Segur per disseny** – sense servidor, sense dades enviades, sense cookies.
+   - ✅ Tot el joc s’executa localment al teu navegador.
+   - ✅ Cap script extern ni llibreries de tercers: zero risc d’injecció o rastreig amagat.
 - 🛡️ **Zero cookies, zero rastreig, zero dades personals** – respectem la teva privacitat.
 - 🧩 **Obert i col·laboratiu** – paraules i categories són **públiques** i millorables per la comunitat.
 - 🎨 **Interfície simple i clara** – fàcil d’entendre fins i tot per a nens o gent gran.
@@ -82,6 +85,7 @@ Vols afegir paraules noves? Millorar categories? Fer una versió per a nens?
 - **100% frontend** – no hi ha servidor, base de dades ni autenticació.
 - **Autoallotjat** – totes les icones i recursos són locals (cap connexió a CDN).
 - **Optimitzat per a SEO i xarxes socials** – amb metadades Open Graph i Schema.org.
+- **Sense dependències externes** – cap CDN, cap framework, cap biblioteca de tercers. Tot el codi és visible, auditable i s’executa només al dispositiu.
 
 ---
 
