@@ -73,19 +73,17 @@ const WORDS = [
 
 // MITJÀ (1)
 ["brúixola", 2, 1], ["telescopi", 2, 1], ["microscopi", 2, 1], ["paraigua", 2, 1],
-["paracaigudes", 2, 1], ["submarí", 2, 1], ["helicòpter", 2, 1], ["tractor", 2, 1],
-["piano", 2, 1], ["guitarra", 2, 1], ["violí", 2, 1], ["tambor", 2, 1], ["escala", 2, 1],
-["xarxa", 2, 1], ["ordinador", 2, 1], ["impressora", 2, 1], ["nevera", 2, 1], ["martell", 2, 1],
-["serra", 2, 1], ["càmera", 2, 1], ["ascensor", 2, 1], ["semàfor", 2, 1], ["calculadora", 2, 1],
-["tisores", 2, 1], ["trepant", 2, 1], ["tornavís", 2, 1], ["endoll", 2, 1], ["radiador", 2, 1],
-["ventilador", 2, 1], ["bateria", 2, 1],
+["guitarra", 2, 1], ["violí", 2, 1], ["tambor", 2, 1], ["radiador", 2, 1],
+["xarxa", 2, 1], ["ordinador", 2, 1], ["impressora", 2, 1], ["martell", 2, 1],
+["serra", 2, 1], ["càmera", 2, 1], ["ascensor", 2, 1], ["semàfor", 2, 1]
+["tisores", 2, 1], ["trepant", 2, 1], ["tornavís", 2, 1], ["endoll", 2, 1]
+["ventilador", 2, 1], ["calculadora", 2, 1],
 
 // DIFÍCIL (2)
-["catamarà", 2, 2], ["aeròdrom", 2, 2], ["periscopi", 2, 2], ["baròmetre", 2, 2],
-["termòmetre", 2, 2], ["dinamòmetre", 2, 2], ["escafandre", 2, 2], ["batiscaf", 2, 2],
-["fonendoscopi", 2, 2], ["estetoscopi", 2, 2], ["giroscopi", 2, 2], ["teodolit", 2, 2],
-["hidròmetre", 2, 2], ["piròmetre", 2, 2], ["altímetre", 2, 2], ["alveògraf", 2, 2],
-["sismògraf", 2, 2], ["higròmetre", 2, 2], ["anemòmetre", 2, 2], ["pluviòmetre", 2, 2],
+["baròmetre", 2, 2], ["termòmetre", 2, 2], ["dinamòmetre", 2, 2], ["fonendoscopi", 2, 2],
+["estetoscopi", 2, 2], ["giroscopi", 2, 2], ["teodolit", 2, 2], ["hidròmetre", 2, 2],
+["piròmetre", 2, 2], ["altímetre", 2, 2]["sismògraf", 2, 2], ["higròmetre", 2, 2], 
+["anemòmetre", 2, 2], ["pluviòmetre", 2, 2],
 
 // --- NATURA (ID: 3) ---
 // FÀCIL (0)
@@ -125,7 +123,7 @@ const WORDS = [
 ["museu", 4, 1], ["teatre", 4, 1], ["estadi", 4, 1], ["mercat", 4, 1], ["oficina", 4, 1],
 ["fàbrica", 4, 1], ["granja", 4, 1], ["jardí", 4, 1], ["hivernacle", 4, 1],
 ["nucli antic", 4, 1], ["barri", 4, 1], ["autopista", 4, 1], ["túnel", 4, 1], ["pont", 4, 1],
-["península", 4, 1], ["continent", 4, 1], ["pol nord", 4, 1], ["equador", 4, 1], ["illa", 4, 1],
+["península", 4, 1], ["continent", 4, 1], ["pol", 4, 1], ["equador", 4, 1], ["illa", 4, 1],
 ["ajuntament", 4, 1], ["comissaria", 4, 1], ["farmàcia", 4, 1], ["fleca", 4, 1], ["perruqueria", 4, 1],
 ["taller", 4, 1], ["port", 4, 1], ["far", 4, 1], ["castell", 4, 1], ["palau", 4, 1],
 
@@ -133,7 +131,7 @@ const WORDS = [
 ["penitenciaria", 4, 2], ["asil", 4, 2], ["monestir", 4, 2], ["abadia", 4, 2],
 ["catedral", 4, 2], ["basílica", 4, 2], ["mesquita", 4, 2], ["sinagoga", 4, 2],
 ["observatori", 4, 2], ["laboratori", 4, 2], ["reserva", 4, 2], ["parc natural", 4, 2],
-["biosfera", 4, 2], ["estació espacial", 4, 2], ["submarí nuclear", 4, 2], ["refugi", 4, 2],
+["biosfera", 4, 2], ["estació espacial", 4, 2], ["submarí", 4, 2], ["refugi", 4, 2],
 ["búnquer", 4, 2], ["fòrum", 4, 2], ["àgora", 4, 2], ["cràter", 4, 2],
 
 // --- PROFESSIONS (ID: 5) ---
@@ -142,8 +140,8 @@ const WORDS = [
 ["pilot", 5, 0], ["mecànic", 5, 0], ["granjer", 5, 0], ["dentista", 5, 0], ["corredor", 5, 0],
 ["cantant", 5, 0], ["actor", 5, 0], ["jardiner", 5, 0], ["pescador", 5, 0], ["fuster", 5, 0],
 ["sastre", 5, 0], ["pastor", 5, 0], ["carter", 5, 0], ["ferrer", 5, 0], ["flequer", 5, 0],
-["pallasso", 5, 0], ["mag", 5, 0], ["soldat", 5, 0], ["rei", 5, 0], ["príncep", 5, 0],
-["porter", 5, 0], ["venedor", 5, 0], ["xofer", 5, 0], ["detectiu", 5, 0],
+["pallasso", 5, 0], ["mag", 5, 0], ["soldat", 5, 0], ["porter", 5, 0], ["venedor", 5, 0],
+["xofer", 5, 0], ["detectiu", 5, 0],
 
 // MITJÀ (1)
 ["arquitecte", 5, 1], ["enginyer", 5, 1], ["advocat", 5, 1], ["jutge", 5, 1], ["fotògraf", 5, 1],
@@ -167,7 +165,7 @@ const WORDS = [
 ["joc", 6, 0], ["esport", 6, 0], ["festa", 6, 0], ["nadala", 6, 0], ["pasqua", 6, 0],
 ["flama", 6, 0], ["bandera", 6, 0], ["himne", 6, 0], ["monument", 6, 0], ["castell", 6, 0],
 ["màgia", 6, 0], ["circ", 6, 0], ["ràdio", 6, 0], ["tele", 6, 0], ["vídeo", 6, 0],
-["notícia", 6, 0], ["premi", 6, 0], ["disfressa", 6, 0], ["màscara", 6, 0],
+["notícia", 6, 0], ["premi", 6, 0], ["disfressa", 6, 0], ["màscara", 6, 0], ["piano", 6, 0], 
 
 // MITJÀ (1)
 ["escultura", 6, 1], ["mosaic", 6, 1], ["òpera", 6, 1], ["simfonia", 6, 1], ["sonata", 6, 1],
