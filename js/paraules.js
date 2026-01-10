@@ -75,8 +75,8 @@ const WORDS = [
 ["brúixola", 2, 1], ["telescopi", 2, 1], ["microscopi", 2, 1], ["paraigua", 2, 1],
 ["guitarra", 2, 1], ["violí", 2, 1], ["tambor", 2, 1], ["radiador", 2, 1],
 ["xarxa", 2, 1], ["ordinador", 2, 1], ["impressora", 2, 1], ["martell", 2, 1],
-["serra", 2, 1], ["càmera", 2, 1], ["ascensor", 2, 1], ["semàfor", 2, 1]
-["tisores", 2, 1], ["trepant", 2, 1], ["tornavís", 2, 1], ["endoll", 2, 1]
+["serra", 2, 1], ["càmera", 2, 1], ["ascensor", 2, 1],
+["tisores", 2, 1], ["trepant", 2, 1], ["tornavís", 2, 1], ["endoll", 2, 1],
 ["ventilador", 2, 1], ["calculadora", 2, 1],
 
 // DIFÍCIL (2)
@@ -162,7 +162,7 @@ const WORDS = [
 // FÀCIL (0)
 ["conte", 6, 0], ["dibuix", 6, 0], ["música", 6, 0], ["cançó", 6, 0], ["fotografia", 6, 0],
 ["pintura", 6, 0], ["dansa", 6, 0], ["obra", 6, 0], ["pel·lícula", 6, 0], ["història", 6, 0],
-["joc", 6, 0], ["esport", 6, 0], ["festa", 6, 0], ["nadala", 6, 0], ["pasqua", 6, 0],
+["joc", 6, 0], ["festa", 6, 0], ["nadala", 6, 0], ["pasqua", 6, 0],
 ["flama", 6, 0], ["bandera", 6, 0], ["himne", 6, 0], ["monument", 6, 0], ["castell", 6, 0],
 ["màgia", 6, 0], ["circ", 6, 0], ["ràdio", 6, 0], ["tele", 6, 0], ["vídeo", 6, 0],
 ["notícia", 6, 0], ["premi", 6, 0], ["disfressa", 6, 0], ["màscara", 6, 0], ["piano", 6, 0], 
@@ -179,7 +179,7 @@ const WORDS = [
 ["patrimoni", 6, 2], ["herència", 6, 2], ["iconografia", 6, 2], ["hagiografia", 6, 2],
 ["epigrafia", 6, 2], ["numismàtica", 6, 2], ["filatèlia", 6, 2], ["criptografia", 6, 2],
 ["heràldica", 6, 2], ["genealogia", 6, 2], ["etnografia", 6, 2], ["sociolingüística", 6, 2],
-["paleografia", 6, 2], ["diplomàtica", 6, 2], ["sigil·lografia", 6, 2], ["vexil·lologia", 6, 2],
+["paleografia", 6, 2], ["sigil·lografia", 6, 2], ["vexil·lologia", 6, 2],
 ["toponímia", 6, 2], ["antroponímia", 6, 2], ["filologia", 6, 2], ["semiòtica", 6, 2],
 ["hermenèutica", 6, 2], ["metafísica", 6, 2], ["epistemologia", 6, 2], ["teologia", 6, 2],
 ["cosmogonia", 6, 2], ["litúrgia", 6, 2], ["jurisprudència", 6, 2], ["museologia", 6, 2],
