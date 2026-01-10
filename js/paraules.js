@@ -82,7 +82,7 @@ const WORDS = [
 // DIFÍCIL (2)
 ["baròmetre", 2, 2], ["termòmetre", 2, 2], ["dinamòmetre", 2, 2], ["fonendoscopi", 2, 2],
 ["estetoscopi", 2, 2], ["giroscopi", 2, 2], ["teodolit", 2, 2], ["hidròmetre", 2, 2],
-["piròmetre", 2, 2], ["altímetre", 2, 2]["sismògraf", 2, 2], ["higròmetre", 2, 2], 
+["piròmetre", 2, 2], ["altímetre", 2, 2], ["sismògraf", 2, 2], ["higròmetre", 2, 2], 
 ["anemòmetre", 2, 2], ["pluviòmetre", 2, 2],
 
 // --- NATURA (ID: 3) ---
