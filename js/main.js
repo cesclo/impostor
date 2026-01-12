@@ -11,7 +11,7 @@ const MAX_MEMORIA = 5;
 function configurarNoms() {
   const n = parseInt(document.getElementById("numJugadors").value);
   if (isNaN(n) || n < 3) {
-    alert("Hi ha d’haver entre 3 o més juadors.");
+    alert("Hi ha d’haver 3 o més juadors.");
     return;
   }
   const div = document.getElementById("inputsNoms");

@@ -5,9 +5,7 @@
 Juga amb amics, família o a classe! Trieu una paraula secreta, assigneu rols i comenceu la discussió.  
 Qui és l’**impostor**? Només hi ha una manera de saber-ho: **donar pistes... sense dir la paraula!**
 
-![L’impostor – Joc social en català](https://impostor.whym.cat/social-preview.jpg)
-
-🔗 **Prova’l ara**: [https://impostor.whym.cat](https://impostor.whym.cat)
+🔗 **Prova’l a**: [https://impostor.whym.cat](https://impostor.whym.cat)
 
 ---
 
