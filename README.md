@@ -9,7 +9,7 @@ Qui és l’**impostor**? Només hi ha una manera de saber-ho: **donar pistes...
 
 ---
 
-## 🎲 Com es juga?
+## 🎲 Com s´hi juga?
 
 1. **Trieu 3 o més jugadors** (ideal per a grups petits o grans).
 2. **Introduïu noms** (opcional, però més divertit!).
