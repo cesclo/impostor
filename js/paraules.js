@@ -65,7 +65,7 @@ const WORDS = [
 ["gaspatxo", 1, 1], ["paella", 1, 1], ["escudella", 1, 1], ["coca", 1, 1], 
 ["allioli", 1, 1], ["romesco", 1, 1], ["farigola", 1, 1], ["canelons", 1, 1], 
 ["safrà", 1, 1], ["julivert", 1, 1], ["calçots", 1, 1], ["samfaina", 1, 1],
-["butifarra d'ou", 1, 1], ["llonganissa", 1, 1], ["pa amb tomàquet", 1, 1],
+["butifarra d'ou", 1, 1], ["llangonissa", 1, 1], ["pa amb tomata", 1, 1],
 ["crema catalana", 1, 1], ["mel i mató", 1, 1],
 
 // DIFÍCIL (2) - Plats tradicionals catalans
@@ -127,7 +127,7 @@ const WORDS = [
 ["horitzó", 3, 2], ["ecosistema", 3, 2], ["fotosíntesi", 3, 2], ["clorofil·la", 3, 2],
 ["tossals", 3, 2], ["clotada", 3, 2], ["serrat", 3, 2], ["ubac", 3, 2],
 ["solà", 3, 2], ["aiguabarreig", 3, 2], ["planell", 3, 2], ["turó", 3, 2],
-["puig", 3, 2], ["cingle", 3, 2], ["forat del vent", 3, 2],
+["puig", 3, 2], ["cingle", 3, 2], ["avenc", 3, 2],
 
 // --- LLOCS (ID: 4) ---
 // FÀCIL (0) - Llocs genèrics + ciutats catalanes
@@ -161,40 +161,40 @@ const WORDS = [
 // --- PROFESSIONS (ID: 5) ---
 // FÀCIL (0) - Professions bàsiques + modernes (amb inclusió de gènere)
 ["docent", 5, 0], ["mestre/mestra", 5, 0], ["metge/metgessa", 5, 0], 
-["bomber/bombera", 5, 0], ["policia", 5, 0], ["cuiner/cuinera", 5, 0],
-["pilot/pilota", 5, 0], ["mecànic/mecànica", 5, 0], ["granjer/granjera", 5, 0], 
+["bomber/a", 5, 0], ["policia", 5, 0], ["cuiner/a", 5, 0],
+["pilot", 5, 0], ["mecànic/a", 5, 0], ["granjer/a", 5, 0], 
 ["dentista", 5, 0], ["atleta", 5, 0], ["cantant", 5, 0], 
-["actor/actriu", 5, 0], ["jardiner/jardinera", 5, 0], ["pescador/pescadora", 5, 0], 
-["fuster/fustera", 5, 0], ["sastre/sastressa", 5, 0], ["pastor/pastora", 5, 0], 
-["carter/cartera", 5, 0], ["flequer/flequera", 5, 0], ["pallasso/pallassa", 5, 0], 
-["mag/maga", 5, 0], ["porter/portera", 5, 0], ["venedor/venedora", 5, 0],
-["xofer/xoferesa", 5, 0], ["detectiu", 5, 0], ["dissenyador/dissenyadora", 5, 0], 
-["programador/programadora", 5, 0], ["youtuber", 5, 0], ["influencer", 5, 0],
+["actor/actriu", 5, 0], ["jardiner/a", 5, 0], ["pescador/a", 5, 0], 
+["fuster/a", 5, 0], ["sastre/ssa", 5, 0], ["pastor/a", 5, 0], 
+["carter/a", 5, 0], ["flequer/a", 5, 0], ["pallasso/a", 5, 0], 
+["mag", 5, 0], ["porter/a", 5, 0], ["venedor/a", 5, 0],
+["xofer", 5, 0], ["detectiu", 5, 0], ["dissenyador/a", 5, 0], 
+["programador/a", 5, 0], ["youtuber", 5, 0], ["influencer", 5, 0],
 
 // MITJÀ (1) - Professions especialitzades + tecnològiques
-["arquitecte/arquitecta", 5, 1], ["enginyer/enginyera", 5, 1], ["advocat/advocada", 5, 1], 
-["jutge/jutgessa", 5, 1], ["fotògraf/fotògrafa", 5, 1], ["periodista", 5, 1], 
-["escenògraf/escenògrafa", 5, 1], ["coreògraf/coreògrafa", 5, 1], ["geòleg/geòloga", 5, 1], 
-["biòleg/biòloga", 5, 1], ["químic/química", 5, 1], ["físic/física", 5, 1], 
-["astrònom/astrònoma", 5, 1], ["historiador/historiadora", 5, 1], 
-["traductor/traductora", 5, 1], ["intèrpret", 5, 1], ["psicòleg/psicòloga", 5, 1], 
-["veterinari/veterinària", 5, 1], ["mariner/marinera", 5, 1], ["electricista", 5, 1], 
-["lampista", 5, 1], ["paleta", 5, 1], ["escriptor/escriptora", 5, 1], 
-["bibliotecari/bibliotecària", 5, 1], ["comptable", 5, 1], ["model", 5, 1], 
-["entrenador/entrenadora", 5, 1], ["àrbitre/àrbitra", 5, 1],
-["desenvolupador/desenvolupadora", 5, 1], ["analista de dades", 5, 1], 
-["community manager", 5, 1], ["dissenyador/dissenyadora UX", 5, 1], 
+["arquitecte/a", 5, 1], ["enginyer/a", 5, 1], ["advocat/da", 5, 1], 
+["jutge/ssa", 5, 1], ["fotògraf/a", 5, 1], ["periodista", 5, 1], 
+["escenògraf/a", 5, 1], ["coreògraf/a", 5, 1], ["geòleg/geòloga", 5, 1], 
+["biòleg/biòloga", 5, 1], ["químic/a", 5, 1], ["físic/a", 5, 1], 
+["astrònom/a", 5, 1], ["historiador/a", 5, 1], 
+["traductor/a", 5, 1], ["intèrpret", 5, 1], ["psicòleg/psicòloga", 5, 1], 
+["veterinari/a", 5, 1], ["mariner/a", 5, 1], ["electricista", 5, 1], 
+["lampista", 5, 1], ["paleta", 5, 1], ["escriptor/a", 5, 1], 
+["bibliotecari/a", 5, 1], ["comptable", 5, 1], ["model", 5, 1], 
+["entrenador/a", 5, 1], ["àrbitre/a", 5, 1],
+["desenvolupador/a", 5, 1], ["analista de dades", 5, 1], 
+["community manager", 5, 1], ["dissenyador/a UX", 5, 1], 
 ["streamer", 5, 1], ["podcaster", 5, 1],
 
 // DIFÍCIL (2) - Professions específiques
-["criptògraf/criptògrafa", 5, 2], ["paleontòleg/paleontòloga", 5, 2], 
-["arqueòleg/arqueòloga", 5, 2], ["entomòleg/entomòloga", 5, 2],
-["ornitòleg/ornitòloga", 5, 2], ["cartògraf/cartògrafa", 5, 2], 
-["topògraf/topògrafa", 5, 2], ["oceanògraf/oceanògrafa", 5, 2], 
-["meteoròleg/meteoròloga", 5, 2], ["etnòleg/etnòloga", 5, 2], 
-["lexicògraf/lexicògrafa", 5, 2], ["patòleg/patòloga", 5, 2], 
-["anestesista", 5, 2], ["radiòleg/radiòloga", 5, 2], ["sommelier", 5, 2], 
-["enòleg/enòloga", 5, 2], ["actuari/actuària", 5, 2], ["agrònom/agrònoma", 5, 2],
+["criptògraf/a", 5, 2], ["paleontòleg/oga", 5, 2], 
+["arqueòleg/oga", 5, 2], ["entomòleg/a", 5, 2],
+["ornitòleg/a", 5, 2], ["cartògraf/ca", 5, 2], 
+["topògraf/a", 5, 2], ["oceanògraf/a", 5, 2], 
+["meteoròleg/a", 5, 2], ["etnòleg/a", 5, 2], 
+["lexicògraf/a", 5, 2], ["patòleg/a", 5, 2], 
+["anestesista", 5, 2], ["radiòleg/oga", 5, 2], ["sommelier", 5, 2], 
+["enòleg/a", 5, 2], ["actuari/a", 5, 2], ["agrònom/a", 5, 2],
 
 // --- CULTURA (ID: 6) ---
 // FÀCIL (0) - Cultura popular catalana i universal
@@ -222,10 +222,9 @@ const WORDS = [
 ["senyera", 6, 2], ["muixeranga", 6, 2], ["falcons", 6, 2], ["marrecs", 6, 2],
 ["àliga", 6, 2], ["mulassa", 6, 2], ["drac", 6, 2], ["bou", 6, 2],
 ["tabal", 6, 2], ["gralla", 6, 2], ["tenora", 6, 2], ["tible", 6, 2],
-["enramades", 6, 2], ["cobles", 6, 2], ["verdaguer", 6, 2], ["maragall", 6, 2],
-["pla de l'estany", 6, 2], ["taula parada", 6, 2], ["pessebre", 6, 2],
-["pubilla", 6, 2], ["hereu", 6, 2], ["mas", 6, 2], ["casals", 6, 2],
-["esbart", 6, 2], ["cant coral", 6, 2], ["orfeó", 6, 2],
+["enramades", 6, 2], ["cobles", 6, 2], ["pessebre", 6, 2],
+["pubilla", 6, 2], ["hereu", 6, 2], ["esbart", 6, 2], 
+["coral", 6, 2], ["orfeó", 6, 2], ["truc", 7, 2]
 
 // --- ESPORTS (ID: 7) ---
 // FÀCIL (0) - Esports populars + catalans
@@ -241,8 +240,8 @@ const WORDS = [
 ["pentatló", 7, 1], ["orientació", 7, 1], ["rem", 7, 1], ["piragüisme", 7, 1], 
 ["vela", 7, 1], ["surf", 7, 1], ["paracaigudisme", 7, 1], ["escalada", 7, 1], 
 ["trail", 7, 1], ["biatló", 7, 1], ["curling", 7, 1], ["polo", 7, 1], 
-["pàdel", 7, 1], ["futbol sala", 7, 1], ["correbars", 7, 1], 
-["bitlles catalanes", 7, 1], ["pilota valenciana", 7, 1], ["jocs olímpics", 7, 1],
+["pàdel", 7, 1], ["futbol sala", 7, 1], ["bitlles catalanes", 7, 1], 
+["pilota valenciana", 7, 1], ["jocs olímpics", 7, 1],
 
 // DIFÍCIL (2) - Esports poc coneguts + jocs tradicionals catalans
 ["criquet", 7, 2], ["squash", 7, 2], ["badminton", 7, 2], ["taekwondo", 7, 2], 
@@ -250,7 +249,6 @@ const WORDS = [
 ["bob", 7, 2], ["luge", 7, 2], ["skeleton", 7, 2], ["lacrosse", 7, 2],
 ["bòlit", 7, 2], ["bèlit", 7, 2], ["birles", 7, 2], ["marro", 7, 2],
 ["nyoca", 7, 2], ["rínxols", 7, 2], ["trípit i trapot", 7, 2], ["sambori", 7, 2],
-["raig i bitlles", 7, 2], ["tala", 7, 2], ["botifarra", 7, 2], ["truc", 7, 2],
 ];
 
 // Funció de validació completa amb detecció d'errors d'estructura
