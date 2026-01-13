@@ -147,7 +147,7 @@ const WORDS = [
 ["ajuntament", 4, 1], ["comissaria", 4, 1], ["farmàcia", 4, 1], ["fleca", 4, 1], 
 ["perruqueria", 4, 1], ["taller", 4, 1], ["port", 4, 1], ["far", 4, 1], 
 ["castell", 4, 1], ["palau", 4, 1], ["Figueres", 4, 1], ["Sabadell", 4, 1],
-["Terrassa", 4, 1], ["Mataró", 4, 1], ["Berga", 4, 1], ["Ripoll", 4, 1],
+["Terrassa", 4, 1], ["Mataró", 4, 1], ["Berga", 4, 1],
 ["París", 4, 1], ["Londres", 4, 1], ["Roma", 4, 1], ["Berlín", 4, 1],
 ["Lisboa", 4, 1], ["Amsterdam", 4, 1], ["Viena", 4, 1], ["Praga", 4, 1],
 
@@ -224,7 +224,7 @@ const WORDS = [
 ["tabal", 6, 2], ["gralla", 6, 2], ["tenora", 6, 2], ["tible", 6, 2],
 ["enramades", 6, 2], ["cobles", 6, 2], ["pessebre", 6, 2],
 ["pubilla", 6, 2], ["hereu", 6, 2], ["esbart", 6, 2], 
-["coral", 6, 2], ["orfeó", 6, 2], ["truc", 7, 2]
+["coral", 6, 2], ["orfeó", 6, 2], ["truc", 7, 2],
 
 // --- ESPORTS (ID: 7) ---
 // FÀCIL (0) - Esports populars + catalans
@@ -450,7 +450,7 @@ function validarParaules() {
   let total = 0;
   
   CATEGORIES.forEach((cat, idCat) => {
-    stats[cat] = { facil: 0, mitja: 0, dificil: 0, total: 0 };
+    stats[cat] = { fàcil: 0, mitja: 0, difícil: 0, total: 0 };
     
     DIFICULTATS.forEach((dif, idDif) => {
       const count = WORDS.filter(w => w[1] === idCat && w[2] === idDif).length;
@@ -462,7 +462,7 @@ function validarParaules() {
     
     // Mostrar estadístiques per categoria
     console.log(`\n🏷️  ${cat.toUpperCase()}`);
-    console.log(`   Fàcil: ${stats[cat].facil} | Mitjà: ${stats[cat].mitja} | Difícil: ${stats[cat].dificil}`);
+    console.log(`   Fàcil: ${stats[cat].fàcil} | Mitjà: ${stats[cat].mitja} | Difícil: ${stats[cat].difícil}`);
     console.log(`   📦 Total: ${stats[cat].total} paraules`);
     
     // Advertències d'equilibri
@@ -474,7 +474,7 @@ function validarParaules() {
       advertencies++;
     }
     
-    if (stats[cat].facil === 0 && stats[cat].total > 0) {
+    if (stats[cat].fàcil === 0 && stats[cat].total > 0) {
       warns.push(`⚠️  Categoria "${cat}" no té paraules fàcils`);
       advertencies++;
     }
