@@ -91,7 +91,7 @@ const WORDS = [
 ["xarxa", 2, 1], ["ordinador", 2, 1], ["impressora", 2, 1], ["martell", 2, 1],
 ["serra", 2, 1], ["càmera", 2, 1], ["ascensor", 2, 1], ["tisores", 2, 1], 
 ["trepant", 2, 1], ["tornavís", 2, 1], ["endoll", 2, 1], ["ventilador", 2, 1], 
-["calculadora", 2, 1], ["escombra", 2, 1], ["galleda", 2, 1],
+["calculadora", 2, 1], ["escombra", 2, 1], ["galleda", 2, 1],["pasta de dents", 2, 1],
 
 // DIFÍCIL (2)
 ["baròmetre", 2, 2], ["termòmetre", 2, 2], ["dinamòmetre", 2, 2], ["fonendoscopi", 2, 2],
