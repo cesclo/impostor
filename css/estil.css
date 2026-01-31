@@ -188,6 +188,33 @@ input, select {
   font-family: inherit;
 }
 
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23adb5bd' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 48px;
+  cursor: pointer;
+}
+
+select option {
+  background: #1a1f3a;
+  color: var(--color-text);
+  padding: 12px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input::placeholder {
   color: var(--color-text-suau);
 }
@@ -505,11 +532,29 @@ footer {
   text-align: center;
   padding: 24px 16px;
   font-size: 0.9em;
-  color: var(--color-text-suau);
+  color: var(--color-text);
   border-top: 1px solid var(--color-borde);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: var(--backdrop-blur);
   -webkit-backdrop-filter: var(--backdrop-blur);
+  line-height: 1.8;
+}
+
+footer a {
+  color: var(--color-secundari);
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: var(--color-secundari-hover);
+}
+
+#btnGuiaFooter {
+  margin-bottom: 16px;
+  padding: 12px 20px;
+  font-size: 1em;
+  width: auto;
+  display: inline-flex;
 }
 
 a {
@@ -656,7 +701,13 @@ a:hover::after {
   }
 }
 
-/* Mode clar (opcional per futures versions) */
-@media (prefers-color-scheme: light) {
-  /* Mantenim el mode fosc per coherència visual */
+/* Focus visible per accessibilitat amb teclat */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
 }
