@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heardle Català</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://jocs.whym.cat/js/game-guard.js" data-game-id="heardle"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Heardle Català</h1>
+            <p class="subtitle">Endevina la cançó del dia!</p>
+        </header>
+
+        <main>
+            <!-- Barra de progrés dels intents -->
+            <div class="attempts-bar">
+                <div class="attempt-segment" data-attempt="1">
+                    <span class="segment-time">1s</span>
+                </div>
+                <div class="attempt-segment" data-attempt="2">
+                    <span class="segment-time">2s</span>
+                </div>
+                <div class="attempt-segment" data-attempt="3">
+                    <span class="segment-time">4s</span>
+                </div>
+                <div class="attempt-segment" data-attempt="4">
+                    <span class="segment-time">7s</span>
+                </div>
+                <div class="attempt-segment" data-attempt="5">
+                    <span class="segment-time">11s</span>
+                </div>
+                <div class="attempt-segment" data-attempt="6">
+                    <span class="segment-time">16s</span>
+                </div>
+            </div>
+
+            <!-- Reproductor -->
+            <div class="player-section">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                        <div class="progress-unlocked"></div>
+                    </div>
+                    <div class="time-display">
+                        <span class="current-time">0:00</span>
+                        <span class="max-time">0:30</span>
+                    </div>
+                </div>
+                <button class="play-button" id="playBtn">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Historial d'intents -->
+            <div class="attempts-history" id="attemptsHistory">
+                <!-- Els intents apareixeran aquí -->
+            </div>
+
+            <!-- Input de resposta -->
+            <div class="guess-section" id="guessSection">
+                <div class="autocomplete-container">
+                    <input type="text"
+                           id="guessInput"
+                           class="guess-input"
+                           placeholder="Cerca una cançó o artista..."
+                           autocomplete="off">
+                    <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                </div>
+                <div class="guess-buttons">
+                    <button class="skip-button" id="skipBtn">Saltar</button>
+                    <button class="submit-button" id="submitBtn">Enviar</button>
+                </div>
+            </div>
+
+            <!-- Resultat final -->
+            <div class="result-section hidden" id="resultSection">
+                <div class="result-icon" id="resultIcon"></div>
+                <h2 class="result-title" id="resultTitle"></h2>
+                <div class="song-reveal" id="songReveal">
+                    <img class="album-art" id="albumArt" src="" alt="Portada">
+                    <div class="song-info">
+                        <span class="song-title" id="revealTitle"></span>
+                        <span class="song-artist" id="revealArtist"></span>
+                    </div>
+                </div>
+                <button class="share-button" id="shareBtn">Compartir resultat</button>
+                <div class="share-copied hidden" id="shareCopied">Copiat al portapapers!</div>
+            </div>
+        </main>
+
+        <footer>
+            <button class="stats-button" id="statsBtn">Estadístiques</button>
+            <button class="info-button" id="infoBtn">Com es juga?</button>
+        </footer>
+
+        <!-- Modal d'estadístiques -->
+        <div class="modal hidden" id="statsModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeStats">&times;</button>
+                <h2>Estadístiques</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="statPlayed">0</span>
+                        <span class="stat-label">Jugades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statWon">0</span>
+                        <span class="stat-label">Guanyades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statStreak">0</span>
+                        <span class="stat-label">Ratxa actual</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statMaxStreak">0</span>
+                        <span class="stat-label">Millor ratxa</span>
+                    </div>
+                </div>
+                <div class="distribution">
+                    <h3>Distribució d'intents</h3>
+                    <div class="distribution-bars" id="distributionBars"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal d'informació -->
+        <div class="modal hidden" id="infoModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeInfo">&times;</button>
+                <h2>Com es juga?</h2>
+                <div class="info-content">
+                    <p>Endevina la cançó del dia en 6 intents!</p>
+                    <ul>
+                        <li>Prem el botó <strong>PLAY</strong> per escoltar un fragment de la cançó</li>
+                        <li>Cada intent desbloqueja més segons de la cançó</li>
+                        <li>Escriu el nom de la cançó o l'artista per endevinar</li>
+                        <li>Si no ho saps, pots <strong>saltar</strong> per obtenir més temps</li>
+                    </ul>
+                    <div class="durations-info">
+                        <h3>Durada per intent:</h3>
+                        <table>
+                            <tr><td>Intent 1:</td><td>1 segon</td></tr>
+                            <tr><td>Intent 2:</td><td>2 segons</td></tr>
+                            <tr><td>Intent 3:</td><td>4 segons</td></tr>
+                            <tr><td>Intent 4:</td><td>7 segons</td></tr>
+                            <tr><td>Intent 5:</td><td>11 segons</td></tr>
+                            <tr><td>Intent 6:</td><td>16 segons</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/songs.js"></script>
+    <script src="js/spotify.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

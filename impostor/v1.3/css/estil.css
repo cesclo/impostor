@@ -1,0 +1,288 @@
+:root {
+  --color-fons: #fbfcff;
+  --color-primari: #1a73e8;
+  --color-secundari: #34a853;
+  --color-perill: #ea4335;
+  --color-impostor: #d93025;
+  --color-innocent: #1e8e3e;
+  --color-text: #202124;
+  --color-text-suau: #5f6368;
+  --color-borde: #dadce0;
+  --color-focus: #8ab4f8;
+  --ombra-suau: 0 2px 12px rgba(0,0,0,0.08);
+  --radi-cantonades: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-fons);
+  color: var(--color-text);
+  line-height: 1.5;
+  padding: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.screen { 
+  display: none; 
+  flex-direction: column;
+  animation: fadeIn 0.4s ease;
+}
+.active { display: flex; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+h1 {
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--color-primari);
+  margin: 16px 0;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 20px 0 12px;
+}
+p {
+  font-size: 1.15em;
+  color: var(--color-text-suau);
+  margin: 12px 0;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radi-cantonades);
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: var(--ombra-suau);
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1em;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radi-cantonades);
+  margin: 10px 0;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radi-cantonades);
+  cursor: pointer;
+  margin: 12px 0;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary { background: var(--color-primari); color: white; }
+.btn-success { background: var(--color-secundari); color: white; }
+.btn-outline { background: transparent; border: 2px solid var(--color-primari); color: var(--color-primari); }
+.btn-lg { padding: 18px; font-size: 1.3em; }
+
+/* Pantalla de rols */
+#instruccio {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #e67e22;
+  margin: 24px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border-radius: var(--radi-cantonades);
+  border-left: 4px solid #ffc107;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
+
+#rolInfo {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  font-size: 1.8em;
+  font-weight: bold;
+  border-radius: var(--radi-cantonades);
+  margin: 24px 0;
+  text-align: center;
+  word-break: break-word;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+#rolInfo.mostrat {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.rol-impostor {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: var(--color-impostor);
+  border: 2px dashed var(--color-impostor);
+}
+
+.rol-innocent {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: var(--color-innocent);
+  border: 2px dashed var(--color-innocent);
+}
+
+/* Botons mutuament exclusius */
+.btn-group {
+  position: relative;
+  height: 70px;
+}
+.btn-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.btn-fade.actiu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.btn-fade.amagant {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.icon {
+  font-size: 2.5em;
+  margin-bottom: 16px;
+  color: var(--color-primari);
+}
+
+/* Final */
+.final {
+  text-align: center;
+  padding: 30px 20px;
+}
+.final h2 {
+  color: var(--color-secundari);
+  font-size: 1.8em;
+}
+.final p {
+  font-size: 1.3em;
+  margin: 20px 0;
+  color: var(--color-text);
+}
+
+#pantallaGuia .card p {
+  margin: 12px 0;
+  font-size: 1.05em;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px 0 10px;
+  font-size: 0.85em;
+  color: var(--color-text-suau);
+}
+a { color: var(--color-primari); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media (max-width: 400px) {
+  h1 { font-size: 1.8em; }
+  button { padding: 14px; font-size: 1.15em; }
+}
+
+@media (max-height: 600px) {
+  footer {
+    display: none;
+  }
+}
+
+.toggle-container {
+  margin-top: 20px;
+  text-align: left;
+}
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05em;
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-input {
+  display: none;
+}
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 13px;
+  transition: background-color 0.3s;
+}
+.toggle-switch::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.toggle-input:checked + .toggle-switch {
+  background-color: var(--color-primari);
+}
+.toggle-input:checked + .toggle-switch::before {
+  transform: translateX(22px);
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Joc social en català per a famílies i amics: 🕵️ L’impostor. Fes deduccions, amaga’t i descobreix qui no sap la paraula secreta! Totalment gratuït i en català." />
+  <meta name="keywords" content="joc en català, joc familiar, joc social, impostor, infiltrat, paraula secreta, cervesa, WHYM, cultura catalana" />
+  <meta name="author" content="WHYM Cervesa Artesanal" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / X (Twitter) -->
+  <meta property="og:title" content="🕵️ L’impostor – Joc social en català" />
+  <meta property="og:description" content="Joc divertit i senzill per a 3 o més jugadors. Totalment en català, gratuït i sense publicitat invasiva" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://impostor.whym.cat" />
+  <meta property="og:image" content="https://impostor.whym.cat/social-preview.jpg" />
+  <meta property="og:locale" content="ca_ES" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🕵️ L’impostor – Joc social en català" />
+  <meta name="twitter:description" content="Prova aquest joc gratuït per a jugar en català amb amics o família." />
+  <meta name="twitter:image" content="https://impostor.whym.cat/social-preview.jpg" />
+
+  <title>🕵️ L’impostor – Joc social en català | WHYM</title>
+  <link rel="canonical" href="https://impostor.whym.cat" />
+  <link rel="stylesheet" href="css/estil.css" />
+  <link rel="icon" href="https://www.whym.cat/favicon.ico" />
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Pantalla 1: Nombre de jugadors -->
+  <div id="pantalla1" class="screen active">
+    <header>
+      <div class="icon">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      <h1>🕵️ L’impostor</h1>
+      <p>Un joc d’engany i deducció – en català i per a tothom</p>
+    </header>
+    <div class="card">
+      <h2>Quants jugadors sou?</h2>
+      <p>Mínim 3</p>
+      <input type="number" id="numJugadors" min="3" value="5" placeholder="Ex: 5">
+      <button class="btn-outline" onclick="mostrarGuia()">
+        <i class="fas fa-question-circle"></i> Com es juga?
+      </button>
+      <button class="btn-primary" onclick="configurarNoms()">
+        <i class="fas fa-arrow-right"></i> Següent
+      </button>
+    </div>
+  </div>
+
+  <!-- Pantalla 2: Noms (opcional) -->
+  <div id="pantalla2" class="screen">
+    <header>
+      <h1>Noms dels jugadors</h1>
+      <p>(Opcional: fes clic per personalitzar)</p>
+    </header>
+    <div class="card">
+      <div id="inputsNoms"></div>
+      <button class="btn-success" onclick="començarJoc()">
+        <i class="fas fa-play"></i> Començar el joc
+      </button>
+    </div>
+  </div>
+
+  <!-- Pantalla 3: Paraula secreta -->
+  <div id="pantalla3" class="screen">
+    <header>
+      <h1>La paraula secreta</h1>
+    </header>
+    <div class="card">
+      <p>Tria una categoria o escriu la teva:</p>
+      <select id="categoria" onchange="actualitzarParaulaInput()">
+        <option value="">-- Categoria (opcional) --</option>
+        <option value="animal">🐾 Animals</option>
+        <option value="menjar">🍕 Menjar</option>
+        <option value="objecte">🏠 Objectes de casa</option>
+        <option value="professio">👩‍⚕️ Professions</option>
+        <option value="ciutat">🏙️ Ciutats</option>
+        <option value="natura">🌿 Natura</option>
+        <option value="esport">⚽ Esports</option>
+      </select>
+      <input type="text" id="paraulaPers" placeholder="O escriu una paraula secreta...">
+      <p style="margin-top: 20px; font-size: 1em;">Quants impostors voleu?</p>
+      <input type="number" id="numImpostors" min="1" max=jugadors.length-1 value="1" placeholder="1">
+      <div class="toggle-container">
+        <label class="toggle-label">
+          <input type="checkbox" id="impostorSapCategoria" class="toggle-input">
+          <span class="toggle-switch"></span>
+          L’impostor sap la <strong>categoria</strong> (però no la paraula)
+        </label>
+      </div>
+      <button class="btn-primary" onclick="prepararRols()">
+        <i class="fas fa-users"></i> Repartir rols
+      </button>
+    </div>
+  </div>
+
+  <!-- Pantalla 4: Flux seqüencial -->
+  <div id="pantalla4" class="screen">
+    <header>
+      <h1>▶️ Distribució de rols</h1>
+    </header>
+    <div class="card">
+      <div id="instruccio">Passa el mòbil a <strong>Jugador 1</strong></div>
+      <div id="rolInfo"></div>
+      <div class="btn-group">
+        <button id="btnVeure" class="btn-primary btn-lg btn-fade actiu" onclick="mostrarRolActual()">
+          <i class="fas fa-eye"></i> Veure el meu rol
+        </button>
+        <button id="btnSeguent" class="btn-success btn-lg btn-fade" onclick="següentJugador()">
+          <i class="fas fa-arrow-right"></i> Amagar i passar al següent
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pantalla 5: Final -->
+  <div id="pantalla5" class="screen">
+    <div class="final">
+      <div class="icon">
+        <i class="fas fa-check-circle" style="color: var(--color-secundari);"></i>
+      </div>
+      <h2>🎉 Preparats!</h2>
+      <p><strong>Podeu començar el joc!</strong></p>
+      <p style="font-size: 1em; color: var(--color-text-suau); margin-top: 20px;">
+        Juga en català i comparteix bons moments!
+      </p>
+      <button class="btn-outline" onclick="mostrarGuia()">
+        <i class="fas fa-question-circle"></i> Com es juga?
+      </button>
+      <button class="btn-outline btn-lg" onclick="novaPartida()">
+        <i class="fas fa-redo"></i> Nova partida
+      </button>
+    </div>
+  </div>
+
+</div>
+
+  <!-- Pantalla 6: Reutilitzar jugadors? -->
+<div id="pantallaNovaPartida" class="screen">
+  <header>
+    <h1>Nova partida</h1>
+    <p>Vols jugar amb els mateixos jugadors?</p>
+  </header>
+  <div class="card">
+    <button class="btn-success" onclick="reutilitzarJugadors()">
+      <i class="fas fa-users"></i> Sí, mateixos jugadors
+    </button>
+    <button class="btn-outline" onclick="novaConfiguracio()">
+      <i class="fas fa-pen"></i> No, vull canviar-los
+    </button>
+    <button class="btn-outline" onclick="mostrarGuia()">
+        <i class="fas fa-question-circle"></i> Com es juga?
+      </button>
+  </div>
+</div>
+
+<!-- Pantalla 7: Guia de joc -->
+<div id="pantallaGuia" class="screen">
+  <header>
+    <h1>📖 Com es juga a L’impostor?</h1>
+    <p>Un joc d’engany i deducció en català</p>
+  </header>
+  <div class="card">
+    <div style="text-align: left; max-width: 420px; margin: 0 auto; line-height: 1.6;">
+      <p><strong>1. Inici:</strong> Trieu 3 0 més jugadors i entreu noms si voleu. Decidiu quants impostors hi haurà, per defecte 1.</p>
+      <p><strong>2. Paraula:</strong> Escolliu opcions de la paraula: categoria, aleatori o entreu la vostra paraula. Decidiu si l'impostor sap la categoria o res.</p>
+      <p><strong>3. Rols:</strong> Un serà l’<span style="color: var(--color-impostor);">impostor</span> (no sap la paraula). La resta la coneixen.</p>
+      <p><strong>4. Discussió:</strong> Per torns, sense dir la paraula, feu una petita una explicació o digueu una paraula relacionada que no sigui massa evident. L’infiltrat ha de deduir-la i fer la seva aportació sense que els altres ho notin.</p>
+      <p><strong>5. Votació:</strong> Quan vulgueu (una o dues voltes), voteu: Compteu "1, 2 i 3" i tots de cop assenyaleu qui penseu que és l’impostor. Si l'heu encertat s'ha acabat la ronda, si falleu podeu fer una altre volta sense el que heu acusat</p>
+    </div>
+    <button class="btn-primary" onclick="tornarAPantallaAnterior()">
+      <i class="fas fa-arrow-left"></i> Tornar
+    </button>
+  </div>
+</div>
+
+<footer>
+  🎮 Joc creat per <a href="https://www.whym.cat" target="_blank" rel="noopener">Cervesa WHYM</a> • Girona<br>
+  Totalment en català • Per a mòbil • Gratuït i lliure
+</footer>
+
+<!-- FontAwesome per icones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="js/paraules.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Schema.org (SEO avançat per a Google) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Game",
+  "name": "L’impostor",
+  "description": "Joc d’engany i deducció per a 3 o més jugadors, totalment en català. Els jugadors han d’endevinar qui és l’impostor mentre aquest intenta descobrir la paraula secreta.",
+  "gamePlatform": ["Mobile", "Web"],
+  "genre": ["Party Game", "Deduction", "Social"],
+  "inLanguage": "ca",
+  "author": {
+    "@type": "Person",
+    "name": "Cervesa WHYM"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<script>
+  // Assegura que els elements siguin visibles quan el teclat surt
+  document.addEventListener('focusin', (e) => {
+    if (e.target.matches('input, select, button')) {
+      setTimeout(() => {
+        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
+    }
+  });
+
+  // Amagar footer en pantalles molt petites (ex: iPhone SE amb teclat)
+  function ajustarFooter() {
+    if (window.innerHeight < 600) {
+      document.querySelector('footer').style.display = 'none';
+    } else {
+      document.querySelector('footer').style.display = 'block';
+    }
+  }
+  window.addEventListener('resize', ajustarFooter);
+  ajustarFooter(); // Executar a l'inici
+</script>
+
+</body>
+</html>
