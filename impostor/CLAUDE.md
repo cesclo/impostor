@@ -4,91 +4,172 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**L'impostor** is a Catalan-language social deduction party game (similar to Spyfall/Infiltrator). Players pass a mobile device to receive secret roles - most learn a secret word while one or more "impostors" don't know it. Players give clues without revealing the word, then vote to identify the impostor.
+**L'impostor** is a social deduction party game in Catalan where players try to identify who doesn't know the secret word. It's a 100% frontend game (no backend) designed to be played by passing a single device between players.
 
-Key characteristics:
-- 100% client-side (no backend, no cookies, no tracking)
-- Zero external dependencies (no CDN, no frameworks, no third-party libraries)
-- Mobile-first design optimized for device passing
-- All content in Catalan
+**Key features:**
+- 3+ players (ideal for groups)
+- Pass-and-play on a single device
+- Secret word from categories or custom input
+- Configurable impostor count and difficulty
+- Zero tracking, zero cookies, 100% privacy-focused
+- Fully offline-capable (no external dependencies)
 
-## Repository Structure
-
-- **`repo/`** - Main production codebase (deployed to impostor.whym.cat)
-- **`v1.0/` through `v1.3/`** - Version snapshots for reference
-
-## Development
-
-### Running Locally
-
-Open `repo/index.html` directly in a browser, or serve via any local HTTP server:
-```bash
-# Python
-python -m http.server 8000 --directory repo
-
-# Node
-npx serve repo
-```
-
-When running on `localhost` or `127.0.0.1`, the word validation system runs automatically and outputs detailed diagnostics to the browser console.
-
-### File Structure (repo/)
-
-```
-repo/
-├── index.html       # Single-page app with all screens
-├── css/estil.css    # All styles, CSS custom properties for theming
-├── js/
-│   ├── main.js      # Game logic and screen transitions
-│   └── paraules.js  # Word database and validation system
-└── [assets]         # favicon, manifest, sitemap, etc.
-```
+**URL:** https://impostor.whym.cat
 
 ## Architecture
 
-### Screen Flow System
+**Stack:** Pure vanilla JavaScript, HTML5, CSS3 - no frameworks, no build tools, no external dependencies
 
-The app uses a multi-screen single-page architecture with lateral slide transitions. Screens are defined as `<div class="screen">` elements in `index.html` and controlled by `canviarPantalla(nouId)` in `main.js`.
+**Files:**
+- `index.html` - Single-page app with all game screens
+- `css/estil.css` - Dark theme styling with CSS variables
+- `js/main.js` - Game logic and UI management
+- `js/paraules.js` - Word database with categories and validation system
+- `guia_validacio_errors.md` - Error validation guide for word database
 
-Screen progression: `pantalla1` (player count) → `pantalla2` (names) → `pantalla3` (word selection) → `pantalla4` (role distribution) → `pantalla5` (game start) → `pantallaNovaPartida` (replay options)
+**SEO & Meta:**
+- Open Graph tags for social sharing
+- Schema.org structured data
+- Sitemap, robots.txt, manifest.json
+- Apple touch icon, favicon
 
-### Word Data Format (paraules.js)
+## Game Flow
 
-Words are stored as tuples in the `WORDS` array:
+1. **Setup (Screen 1-3)**
+   - Choose number of players (minimum 3)
+   - Enter player names (optional)
+   - Select category or enter custom word
+   - Configure impostor count and category hint option
+
+2. **Role Assignment (Screen 4)**
+   - Players pass device one by one
+   - Each sees their role: citizen (sees word) or impostor (sees "IMPOSTOR")
+   - Impostors may see category hint if enabled
+
+3. **Discussion Phase**
+   - Players give clues without saying the word
+   - Impostors try to blend in
+
+4. **Voting (Screen 5)**
+   - Everyone points to their suspect
+   - If impostor eliminated: citizens win
+   - If citizen eliminated: continue without them
+   - Game continues until impostor found or only impostors remain
+
+5. **Results (Screen 6)**
+   - Shows who was impostor
+   - Option to play again or change settings
+
+## Word Database (`js/paraules.js`)
+
+### Structure
+
 ```javascript
-["paraula", categoryIndex, difficultyIndex]
-// Example: ["gos", 0, 0] = word "gos", category 0 (animals), difficulty 0 (easy)
+const WORDS = [
+  ["paraula", categoryIndex, difficultyLevel],
+  // ...
+];
+
+const CATEGORIES = [
+  "Animals",
+  "Menjar i begudes",
+  "Professions",
+  // ... 19 total categories
+];
 ```
 
-Categories (0-7): animals, menjar, objectes, natura, llocs, professions, cultura, esports
-Difficulties (0-2): fàcil, mitja, difícil
+### Categories (19 total)
 
-### Word Validation System
+0. Animals, 1. Menjar i begudes, 2. Professions, 3. Objectes de casa, 4. Esports i oci, 5. Accions/Verbs, 6. Natura, 7. Tecnologia, 8. Sentiments, 9. Ciutat i transport, 10. Roba i accessoris, 11. Arts i cultura, 12. Educació, 13. Salut, 14. Celebracions, 15. Personatges ficticis, 16. Ciència, 17. Paraules compostes, 18. Expressions catalanes
 
-`paraules.js` includes a comprehensive validation function `validarParaules()` that runs automatically in development mode. It checks:
-- Array structure integrity
-- Valid category/difficulty indices
-- Duplicates
-- Whitespace issues
-- Word length warnings
+### Difficulty Levels
 
-Run `validarParaules()` in browser console to validate manually. See `guia_validacio_errors.md` for detailed error documentation.
+- `0` = Easy (common words)
+- `1` = Medium
+- `2` = Hard (rare/complex words)
 
-### Key Global Variables (main.js)
+### Validation System
 
-- `jugadors[]` - Player names array
-- `paraula` - Current secret word
-- `impostors[]` - Names of impostor players
-- `indexActual` - Current player index during role distribution
-- `jocActiu` - Game state flag
-- `historialParaules{}` - Tracks recently used words per category (avoids repeats)
+Built-in validation detects:
+- Structural errors (WORDS/CATEGORIES not arrays)
+- Syntax errors (missing brackets, commas)
+- Invalid entries (not arrays, wrong length)
+- Duplicate words
+- Invalid category/difficulty indices
+- Empty/whitespace words
+- Words used as category names
 
-## Adding New Words
+See `guia_validacio_errors.md` for full validation details.
 
-1. Add entries to `WORDS` array in `paraules.js` following the tuple format
-2. Open the game on localhost and check browser console for validation results
-3. Ensure validation shows "VALIDACIO CORRECTA" before committing
+## Key Features
+
+### Privacy & Security
+- 🔒 No server, no database, no user data collection
+- 🛡️ Zero cookies, zero tracking
+- ✅ All game logic runs locally in browser
+- ✅ No external scripts or libraries (100% self-hosted)
+- ✅ Works fully offline after first load
+
+### UX Features
+- Toast notifications for errors
+- Screen navigation with history
+- Word memory system (tracks last 5 words to avoid repetition)
+- Responsive design (mobile-first)
+- Dark theme with high contrast
+
+### Accessibility
+- Clear visual feedback
+- Large touch targets
+- Simple, intuitive UI
+- Catalan language throughout
+
+## License
+
+CC BY-NC-SA 4.0 (Creative Commons Attribution-NonCommercial-ShareAlike 4.0)
+
+**Can:**
+- Copy and share freely
+- Modify and adapt
+- Use in schools, family gatherings, cultural events
+
+**Cannot:**
+- Commercial use (selling, paid products)
+
+**Must:**
+- Credit original author: _Cervesa WHYM_
+- Link to this project
+- License derivatives under same license
 
 ## Language
 
-All UI text, code comments, variable names, and word content are in Catalan. Maintain this convention when making changes.
+All UI text, comments, variable names are in **Catalan**.
+
+## Related Projects
+
+- `impostor2` - Multiplayer online version with Socket.IO and real-time sync
+- Other games at https://jocs.whym.cat
+
+## Development
+
+No build process needed! Simply:
+
+1. Clone repo
+2. Open `index.html` in browser
+3. Or serve with any static server
+
+For testing word validation:
+```javascript
+// Run validation in browser console after loading paraules.js
+validateWordsDatabase();
+```
+
+## Hosting
+
+- Production: https://impostor.whym.cat
+- Development: Open `index.html` locally or `python -m http.server`
+
+## Contact
+
+**Cervesa WHYM** - https://www.whym.cat
+- Email: cervesa@whym.cat
+- GitHub: @cesclo

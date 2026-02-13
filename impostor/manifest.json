@@ -1,0 +1,16 @@
+{
+  "name": "L'impostor",
+  "short_name": "Impostor",
+  "description": "Joc social en català",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfcff",
+  "theme_color": "#073672",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

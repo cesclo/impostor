@@ -1,0 +1,10 @@
+# Fitxers del sistema
+.DS_Store
+Thumbs.db
+
+# Entorns locals (si mai afegeixes Node.js)
+node_modules/
+.env
+
+# Render (si el fas servir després)
+render.yaml

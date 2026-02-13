@@ -1,0 +1,17 @@
+{
+  "name": "jocs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jocs en català - configuració ESLint compartida",
+  "scripts": {
+    "lint": "eslint --ext .js tabu connexions enigmot xarxaparaula jocs-portal impostor2 impostor heardle"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.6.0"
+  }
+}
