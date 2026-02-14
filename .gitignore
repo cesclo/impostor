@@ -7,4 +7,5 @@ node_modules/
 .env
 
 # Render (si el fas servir després)
-render.yamlCLAUDE.md
+render.yaml
+CLAUDE.md
