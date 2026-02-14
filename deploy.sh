@@ -86,7 +86,7 @@ rsync -az --delete \
 
 # 9. Verificar
 info "Verificant desplegament..."
-ssh "$VPS_HOST" "ls $VPS_APP_DIR/index.html && ls $VPS_APP_DIR/estil/css/estil.css" \
+ssh "$VPS_HOST" "ls $VPS_APP_DIR/index.html && ls /home/deploy/apps/estil/css/estil.css" \
     || error "Verificació fallida: falten fitxers al VPS"
 
 info "Desplegament completat!"
