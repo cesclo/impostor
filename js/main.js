@@ -1,4 +1,4 @@
-/* global WORDS, CATEGORIES, DIFICULTATS, localStorage */
+/* global WORDS, CATEGORIES, DIFICULTATS */
 
 let jugadors = [];
 let paraula = '';
@@ -19,21 +19,22 @@ function escapeHTML (str) {
 
 // Sistema de Toast Notifications
 function showToast (message, type = 'info') {
-  let container = document.querySelector('.toast-container');
+  let container = document.querySelector('.toast-contenidor');
   if (!container) {
     container = document.createElement('div');
-    container.className = 'toast-container';
+    container.className = 'toast-contenidor';
     document.body.appendChild(container);
   }
 
   const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
+  const typeClass = { error: 'toast-error', success: 'toast-exit', warning: 'toast-avis', info: '' };
+  toast.className = `toast ${typeClass[type] || ''}`.trim();
 
   const icons = {
-    error: '⚠️',
-    success: '✅',
-    warning: '⚡',
-    info: 'ℹ️'
+    error: '\u26A0\uFE0F',
+    success: '\u2705',
+    warning: '\u26A1',
+    info: '\u2139\uFE0F'
   };
 
   toast.innerHTML = `
@@ -59,8 +60,8 @@ function configurarNoms () { // eslint-disable-line no-unused-vars
   for (let i = 1; i <= n; i++) {
     const placeholder = `Jugador ${i}`;
     div.innerHTML += `
-      <input type="text" 
-             id="nom${i}" 
+      <input type="text"
+             id="nom${i}"
              value="${placeholder}"
              placeholder="${placeholder}"
              autocomplete="off"
@@ -213,7 +214,7 @@ function prepararRols () { // eslint-disable-line no-unused-vars
 
   const btnVeure = document.getElementById('btnVeure');
   const btnSeguent = document.getElementById('btnSeguent');
-  const rolInfo = document.getElementById('rolInfo');
+  const rolInfo = document.getElementById('rol-info');
   if (btnVeure && btnSeguent) {
     btnVeure.classList.remove('amagant');
     btnVeure.classList.add('actiu');
@@ -235,7 +236,7 @@ function mostrarRolActual () { // eslint-disable-line no-unused-vars
 
   const nom = jugadors[indexActual];
   const esImpostor = impostors.includes(nom);
-  const rolInfo = document.getElementById('rolInfo');
+  const rolInfo = document.getElementById('rol-info');
 
   if (esImpostor) {
     let missatge = '<div style="font-size: 2em; margin-bottom: 12px;">🕵️</div>';
@@ -278,7 +279,7 @@ function mostrarRolActual () { // eslint-disable-line no-unused-vars
 function següentJugador () { // eslint-disable-line no-unused-vars
   if (!jocActiu) return;
 
-  document.getElementById('rolInfo').classList.remove('mostrat');
+  document.getElementById('rol-info').classList.remove('mostrat');
   indexActual++;
 
   if (indexActual >= jugadors.length) {
@@ -312,17 +313,17 @@ function actualitzarInstruccio () {
 
 // Sistema de transicions laterals
 function canviarPantalla (nouId) {
-  const btnGuia = document.getElementById('btnGuiaFooter');
+  const btnGuia = document.getElementById('btn-guia');
   if (btnGuia) {
-    btnGuia.style.display = nouId === 'pantallaGuia' ? 'none' : 'inline-block';
+    btnGuia.style.display = nouId === 'pantalla-guia' ? 'none' : 'inline-flex';
   }
 
-  const pantallaVella = document.querySelector('.screen.active');
+  const pantallaVella = document.querySelector('.pantalla.activa');
   const pantallaNova = document.getElementById(nouId);
 
   if (pantallaVella && pantallaVella.id !== nouId) {
     // Determinar direcció
-    const pantalles = ['pantalla1', 'pantalla2', 'pantalla3', 'pantalla4', 'pantalla5', 'pantallaNovaPartida', 'pantallaGuia'];
+    const pantalles = ['pantalla1', 'pantalla2', 'pantalla3', 'pantalla4', 'pantalla5', 'pantallaNovaPartida', 'pantalla-guia'];
     const indexVell = pantalles.indexOf(pantallaVella.id);
     const indexNou = pantalles.indexOf(nouId);
 
@@ -331,7 +332,7 @@ function canviarPantalla (nouId) {
       direccio = indexNou > indexVell ? 'right' : 'left';
     }
 
-    pantallaVella.classList.remove('active');
+    pantallaVella.classList.remove('activa');
     pantallaVella.classList.add(`exiting-${direccio === 'right' ? 'left' : 'right'}`);
 
     setTimeout(() => {
@@ -339,7 +340,7 @@ function canviarPantalla (nouId) {
     }, 400);
   }
 
-  pantallaNova.classList.add('active');
+  pantallaNova.classList.add('activa');
   pantallaActual = nouId;
 
   // Scroll to top suau
@@ -347,8 +348,8 @@ function canviarPantalla (nouId) {
 }
 
 function mostrarGuia () { // eslint-disable-line no-unused-vars
-  pantallaAnterior = document.querySelector('.screen.active').id;
-  canviarPantalla('pantallaGuia');
+  pantallaAnterior = document.querySelector('.pantalla.activa').id;
+  canviarPantalla('pantalla-guia');
 }
 
 function tornarAPantallaAnterior () { // eslint-disable-line no-unused-vars
@@ -379,70 +380,15 @@ function novaConfiguracio () { // eslint-disable-line no-unused-vars
   canviarPantalla('pantalla1');
 }
 
-// Gestió del tema clar/fosc
-function obtenirTemaEfectiu () {
-  const dataTheme = document.documentElement.getAttribute('data-theme');
-  if (dataTheme) return dataTheme;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-}
-
-function actualitzarBotoTema () {
-  const btn = document.getElementById('btnTema');
-  if (!btn) return;
-  const tema = obtenirTemaEfectiu();
-  btn.textContent = tema === 'dark' ? '☀️' : '🌙';
-  btn.setAttribute('aria-label',
-    tema === 'dark' ? 'Canviar a tema clar' : 'Canviar a tema fosc'
-  );
-}
-
-function actualitzarMetaThemeColor () {
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (!meta) return;
-  const tema = obtenirTemaEfectiu();
-  meta.setAttribute('content', tema === 'dark' ? '#0a0e27' : '#f0f2f8');
-}
-
-function aplicarTemaInicial () {
-  const guardat = localStorage.getItem('tema');
-  if (guardat) {
-    document.documentElement.setAttribute('data-theme', guardat);
-  }
-  actualitzarBotoTema();
-  actualitzarMetaThemeColor();
-}
-
-function canviarTema () { // eslint-disable-line no-unused-vars
-  const actual = obtenirTemaEfectiu();
-  const nou = actual === 'dark' ? 'light' : 'dark';
-
-  document.documentElement.classList.add('tema-transicio');
-  document.documentElement.setAttribute('data-theme', nou);
-  localStorage.setItem('tema', nou);
-
-  actualitzarBotoTema();
-  actualitzarMetaThemeColor();
-
-  setTimeout(() => {
-    document.documentElement.classList.remove('tema-transicio');
-  }, 350);
-}
-
-function inicialitzarListenerTema () {
-  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-    if (!localStorage.getItem('tema')) {
-      actualitzarBotoTema();
-      actualitzarMetaThemeColor();
-    }
-  });
-}
-
 // Inicialització
 document.addEventListener('DOMContentLoaded', () => {
   // Assegurar que la primera pantalla estigui activa
   canviarPantalla('pantalla1');
 
-  // Inicialitzar tema
-  aplicarTemaInicial();
-  inicialitzarListenerTema();
+  // Connectar botó guia de peu.js amb la funció mostrarGuia
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'btn-guia' || e.target.closest('#btn-guia')) {
+      mostrarGuia();
+    }
+  });
 });

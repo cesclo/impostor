@@ -224,7 +224,7 @@ const WORDS = [
   ['tabal', 6, 2], ['gralla', 6, 2], ['tenora', 6, 2], ['tible', 6, 2],
   ['enramades', 6, 2], ['cobles', 6, 2], ['pessebre', 6, 2],
   ['pubilla', 6, 2], ['hereu', 6, 2], ['esbart', 6, 2],
-  ['coral', 6, 2], ['orfeó', 6, 2], ['truc', 7, 2],
+  ['coral', 6, 2], ['orfeó', 6, 2], ['truc', 6, 2],
 
   // --- ESPORTS (ID: 7) ---
   // FÀCIL (0) - Esports populars + catalans
