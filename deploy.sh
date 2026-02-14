@@ -44,6 +44,17 @@ info "Sincronitzant paquet estil al VPS..."
 rsync -az --delete --exclude='node_modules' --exclude='.git' --exclude='CLAUDE.md' \
     "../estil/" "$VPS_HOST:/home/deploy/apps/estil/"
 
+# 4.5. Concatenar CSS d'estil en un sol fitxer (rendiment producció)
+info "Concatenant CSS d'estil per a producció..."
+ssh "$VPS_HOST" "cat \
+    /home/deploy/apps/estil/css/variables.css \
+    /home/deploy/apps/estil/css/base.css \
+    /home/deploy/apps/estil/css/layout.css \
+    /home/deploy/apps/estil/css/components.css \
+    /home/deploy/apps/estil/css/animacions.css \
+    /home/deploy/apps/estil/css/utilities.css \
+    > /home/deploy/apps/estil/css/estil.css"
+
 # 5. Mostrar canvis pendents
 echo ""
 echo "=== Canvis pendents ==="
