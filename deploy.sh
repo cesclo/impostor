@@ -35,6 +35,9 @@ npx stylelint "css/**/*.css" "../estil/css/**/*.css" || error "Stylelint ha trob
 info "Executant eslint..."
 npx eslint js/ || error "ESLint ha trobat errors. Corregeix-los abans de desplegar."
 
+info "Comprovacions PageSpeed HTML..."
+bash "../estil/check-html.sh" . || error "Comprovacions PageSpeed han fallat."
+
 # 3. Comprovar connexió SSH
 info "Comprovant connexió SSH..."
 ssh -o ConnectTimeout=5 -q "$VPS_HOST" "true" || error "No es pot connectar a $VPS_HOST"
