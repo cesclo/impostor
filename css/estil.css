@@ -711,3 +711,259 @@ button:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
+
+/* ================================================
+   TEMA CLAR
+   ================================================ */
+
+/* Transició suau entre temes */
+.tema-transicio,
+.tema-transicio *,
+.tema-transicio *::before,
+.tema-transicio *::after {
+  transition: background-color 0.35s ease,
+              color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              background 0.35s ease !important;
+}
+
+/* Botó toggle de tema */
+.btn-tema {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-borde);
+  background: var(--color-card);
+  cursor: pointer;
+  font-size: 1.3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 8px 16px;
+  transition: transform 0.3s ease, background 0.3s ease;
+  vertical-align: middle;
+  min-width: 44px;
+}
+
+button.btn-tema::before {
+  display: none;
+}
+
+button.btn-tema:hover {
+  transform: rotate(30deg) scale(1.1);
+  box-shadow: none;
+}
+
+button.btn-tema:active {
+  transform: rotate(30deg) scale(1.05);
+}
+
+/* --- Variables del tema clar (auto-detect sistema) --- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-fons: #f0f2f8;
+    --color-fons-gradient: linear-gradient(135deg, #f0f2f8 0%, #e2e6f0 100%);
+    --color-primari: #3b5bdb;
+    --color-primari-hover: #364fc7;
+    --color-secundari: #0ca678;
+    --color-secundari-hover: #099268;
+    --color-perill: #e03131;
+    --color-impostor: #c92a2a;
+    --color-innocent: #2b8a3e;
+    --color-text: #1a1b2e;
+    --color-text-suau: #495057;
+    --color-card: rgba(255, 255, 255, 0.7);
+    --color-card-hover: rgba(255, 255, 255, 0.85);
+    --color-borde: rgba(0, 0, 0, 0.1);
+    --color-focus: #3b5bdb;
+    --ombra-suau: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --ombra-forta: 0 12px 48px rgba(0, 0, 0, 0.12);
+  }
+
+  :root:not([data-theme="dark"]) body::before {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(59, 91, 219, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(12, 166, 120, 0.06) 0%, transparent 50%);
+  }
+
+  :root:not([data-theme="dark"]) input,
+  :root:not([data-theme="dark"]) select {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  :root:not([data-theme="dark"]) select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23495057' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  :root:not([data-theme="dark"]) select option {
+    background: #ffffff;
+    color: #1a1b2e;
+  }
+
+  :root:not([data-theme="dark"]) input:focus,
+  :root:not([data-theme="dark"]) select:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(59, 91, 219, 0.15);
+  }
+
+  :root:not([data-theme="dark"]) button::before {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  :root:not([data-theme="dark"]) .btn-primary {
+    box-shadow: 0 4px 16px rgba(59, 91, 219, 0.3);
+  }
+
+  :root:not([data-theme="dark"]) .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 8px 24px rgba(59, 91, 219, 0.35);
+  }
+
+  :root:not([data-theme="dark"]) .btn-success {
+    box-shadow: 0 4px 16px rgba(12, 166, 120, 0.3);
+  }
+
+  :root:not([data-theme="dark"]) .btn-success:hover:not(:disabled) {
+    box-shadow: 0 8px 24px rgba(12, 166, 120, 0.35);
+  }
+
+  :root:not([data-theme="dark"]) #instruccio {
+    color: #b8860b;
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.1) 0%, rgba(184, 134, 11, 0.05) 100%);
+    border: 2px solid rgba(184, 134, 11, 0.3);
+    border-left: 4px solid #b8860b;
+  }
+
+  :root:not([data-theme="dark"]) .rol-impostor {
+    background: linear-gradient(135deg, rgba(201, 42, 42, 0.12) 0%, rgba(201, 42, 42, 0.04) 100%);
+    border-color: rgba(201, 42, 42, 0.3);
+    box-shadow: 0 0 30px rgba(201, 42, 42, 0.15);
+  }
+
+  :root:not([data-theme="dark"]) .rol-innocent {
+    background: linear-gradient(135deg, rgba(43, 138, 62, 0.12) 0%, rgba(43, 138, 62, 0.04) 100%);
+    border-color: rgba(43, 138, 62, 0.3);
+    box-shadow: 0 0 30px rgba(43, 138, 62, 0.15);
+  }
+
+  :root:not([data-theme="dark"]) .toggle-label:hover,
+  :root:not([data-theme="dark"]) .dificultat-toggle:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  :root:not([data-theme="dark"]) .toggle-switch {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  :root:not([data-theme="dark"]) .toast.warning {
+    border-left-color: #e67700;
+  }
+
+  :root:not([data-theme="dark"]) footer {
+    background: rgba(0, 0, 0, 0.03);
+  }
+}
+
+/* --- Variables del tema clar (override manual) --- */
+[data-theme="light"] {
+  --color-fons: #f0f2f8;
+  --color-fons-gradient: linear-gradient(135deg, #f0f2f8 0%, #e2e6f0 100%);
+  --color-primari: #3b5bdb;
+  --color-primari-hover: #364fc7;
+  --color-secundari: #0ca678;
+  --color-secundari-hover: #099268;
+  --color-perill: #e03131;
+  --color-impostor: #c92a2a;
+  --color-innocent: #2b8a3e;
+  --color-text: #1a1b2e;
+  --color-text-suau: #495057;
+  --color-card: rgba(255, 255, 255, 0.7);
+  --color-card-hover: rgba(255, 255, 255, 0.85);
+  --color-borde: rgba(0, 0, 0, 0.1);
+  --color-focus: #3b5bdb;
+  --ombra-suau: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --ombra-forta: 0 12px 48px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 91, 219, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(12, 166, 120, 0.06) 0%, transparent 50%);
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23495057' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] select option {
+  background: #ffffff;
+  color: #1a1b2e;
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 91, 219, 0.15);
+}
+
+[data-theme="light"] button::before {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .btn-primary {
+  box-shadow: 0 4px 16px rgba(59, 91, 219, 0.3);
+}
+
+[data-theme="light"] .btn-primary:hover:not(:disabled) {
+  box-shadow: 0 8px 24px rgba(59, 91, 219, 0.35);
+}
+
+[data-theme="light"] .btn-success {
+  box-shadow: 0 4px 16px rgba(12, 166, 120, 0.3);
+}
+
+[data-theme="light"] .btn-success:hover:not(:disabled) {
+  box-shadow: 0 8px 24px rgba(12, 166, 120, 0.35);
+}
+
+[data-theme="light"] #instruccio {
+  color: #b8860b;
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.1) 0%, rgba(184, 134, 11, 0.05) 100%);
+  border: 2px solid rgba(184, 134, 11, 0.3);
+  border-left: 4px solid #b8860b;
+}
+
+[data-theme="light"] .rol-impostor {
+  background: linear-gradient(135deg, rgba(201, 42, 42, 0.12) 0%, rgba(201, 42, 42, 0.04) 100%);
+  border-color: rgba(201, 42, 42, 0.3);
+  box-shadow: 0 0 30px rgba(201, 42, 42, 0.15);
+}
+
+[data-theme="light"] .rol-innocent {
+  background: linear-gradient(135deg, rgba(43, 138, 62, 0.12) 0%, rgba(43, 138, 62, 0.04) 100%);
+  border-color: rgba(43, 138, 62, 0.3);
+  box-shadow: 0 0 30px rgba(43, 138, 62, 0.15);
+}
+
+[data-theme="light"] .toggle-label:hover,
+[data-theme="light"] .dificultat-toggle:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .toggle-switch {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .toast.warning {
+  border-left-color: #e67700;
+}
+
+[data-theme="light"] footer {
+  background: rgba(0, 0, 0, 0.03);
+}

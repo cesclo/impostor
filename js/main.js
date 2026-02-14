@@ -1,4 +1,4 @@
-/* global WORDS, CATEGORIES, DIFICULTATS */
+/* global WORDS, CATEGORIES, DIFICULTATS, localStorage */
 
 let jugadors = [];
 let paraula = '';
@@ -10,6 +10,12 @@ let historialParaules = {};
 let pantallaActual = 'pantalla1'; // eslint-disable-line no-unused-vars
 
 const MAX_MEMORIA = 5;
+
+function escapeHTML (str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
 
 // Sistema de Toast Notifications
 function showToast (message, type = 'info') {
@@ -238,7 +244,7 @@ function mostrarRolActual () { // eslint-disable-line no-unused-vars
       const opt = Array.from(select.options).find(o => o.value === window.categoriaActual);
       const nomCategoria = opt ? opt.text : window.categoriaActual;
       missatge += `<span style="font-size: 1.4em;">🚨 Ets l'<strong>IMPOSTOR</strong>!</span><br>
-                   <small>Saps que la paraula és de la categoria:<br><strong>${nomCategoria}</strong></small>`;
+                   <small>Saps que la paraula és de la categoria:<br><strong>${escapeHTML(nomCategoria)}</strong></small>`;
     } else if (window.impostorSapCategoria && !window.categoriaActual) {
       missatge += `<span style="font-size: 1.4em;">🚨 Ets l'<strong>IMPOSTOR</strong>!</span><br>
                    <small>Saps que la paraula és <strong>inventada</strong> (no pertany a cap categoria).</small>`;
@@ -252,7 +258,7 @@ function mostrarRolActual () { // eslint-disable-line no-unused-vars
     rolInfo.innerHTML = `
       <div style="font-size: 2em; margin-bottom: 12px;">🔑</div>
       La paraula secreta és:<br>
-      <span style="font-size: 1.8em; font-weight: 800; color: var(--color-innocent); margin-top: 8px; display: inline-block;">${paraula}</span>
+      <span style="font-size: 1.8em; font-weight: 800; color: var(--color-innocent); margin-top: 8px; display: inline-block;">${escapeHTML(paraula)}</span>
     `;
     rolInfo.className = 'rol-innocent';
   }
@@ -280,7 +286,7 @@ function següentJugador () { // eslint-disable-line no-unused-vars
 
     const iniciador = jugadors[Math.floor(Math.random() * jugadors.length)];
     document.getElementById('suggerimentInici').innerHTML =
-      `💡 Comença: <span class="nom-iniciador">${iniciador}</span>`;
+      `💡 Comença: <span class="nom-iniciador">${escapeHTML(iniciador)}</span>`;
 
     canviarPantalla('pantalla5');
     return;
@@ -301,7 +307,7 @@ function següentJugador () { // eslint-disable-line no-unused-vars
 function actualitzarInstruccio () {
   if (!jocActiu) return;
   const nom = jugadors[indexActual];
-  document.getElementById('instruccio').innerHTML = `Passa el mòbil a <strong>${nom}</strong>`;
+  document.getElementById('instruccio').innerHTML = `Passa el mòbil a <strong>${escapeHTML(nom)}</strong>`;
 }
 
 // Sistema de transicions laterals
@@ -316,7 +322,7 @@ function canviarPantalla (nouId) {
 
   if (pantallaVella && pantallaVella.id !== nouId) {
     // Determinar direcció
-    const pantalles = ['pantalla1', 'pantalla2', 'pantalla3', 'pantalla4', 'pantalla5'];
+    const pantalles = ['pantalla1', 'pantalla2', 'pantalla3', 'pantalla4', 'pantalla5', 'pantallaNovaPartida', 'pantallaGuia'];
     const indexVell = pantalles.indexOf(pantallaVella.id);
     const indexNou = pantalles.indexOf(nouId);
 
@@ -373,14 +379,70 @@ function novaConfiguracio () { // eslint-disable-line no-unused-vars
   canviarPantalla('pantalla1');
 }
 
+// Gestió del tema clar/fosc
+function obtenirTemaEfectiu () {
+  const dataTheme = document.documentElement.getAttribute('data-theme');
+  if (dataTheme) return dataTheme;
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+function actualitzarBotoTema () {
+  const btn = document.getElementById('btnTema');
+  if (!btn) return;
+  const tema = obtenirTemaEfectiu();
+  btn.textContent = tema === 'dark' ? '☀️' : '🌙';
+  btn.setAttribute('aria-label',
+    tema === 'dark' ? 'Canviar a tema clar' : 'Canviar a tema fosc'
+  );
+}
+
+function actualitzarMetaThemeColor () {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (!meta) return;
+  const tema = obtenirTemaEfectiu();
+  meta.setAttribute('content', tema === 'dark' ? '#0a0e27' : '#f0f2f8');
+}
+
+function aplicarTemaInicial () {
+  const guardat = localStorage.getItem('tema');
+  if (guardat) {
+    document.documentElement.setAttribute('data-theme', guardat);
+  }
+  actualitzarBotoTema();
+  actualitzarMetaThemeColor();
+}
+
+function canviarTema () { // eslint-disable-line no-unused-vars
+  const actual = obtenirTemaEfectiu();
+  const nou = actual === 'dark' ? 'light' : 'dark';
+
+  document.documentElement.classList.add('tema-transicio');
+  document.documentElement.setAttribute('data-theme', nou);
+  localStorage.setItem('tema', nou);
+
+  actualitzarBotoTema();
+  actualitzarMetaThemeColor();
+
+  setTimeout(() => {
+    document.documentElement.classList.remove('tema-transicio');
+  }, 350);
+}
+
+function inicialitzarListenerTema () {
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+    if (!localStorage.getItem('tema')) {
+      actualitzarBotoTema();
+      actualitzarMetaThemeColor();
+    }
+  });
+}
+
 // Inicialització
 document.addEventListener('DOMContentLoaded', () => {
   // Assegurar que la primera pantalla estigui activa
   canviarPantalla('pantalla1');
 
-  // Configurar event listener per actualitzar input quan canvia categoria
-  const selectCategoria = document.getElementById('categoria');
-  if (selectCategoria) {
-    selectCategoria.addEventListener('change', actualitzarParaulaInput);
-  }
+  // Inicialitzar tema
+  aplicarTemaInicial();
+  inicialitzarListenerTema();
 });
