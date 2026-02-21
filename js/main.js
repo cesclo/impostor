@@ -348,7 +348,9 @@ function canviarPantalla (nouId) {
 }
 
 function mostrarGuia () { // eslint-disable-line no-unused-vars
-  pantallaAnterior = document.querySelector('.pantalla.activa').id;
+  const actual = document.querySelector('.pantalla.activa');
+  if (actual && actual.id === 'pantalla-guia') return;
+  pantallaAnterior = actual ? actual.id : 'pantalla1';
   canviarPantalla('pantalla-guia');
 }
 
@@ -384,11 +386,4 @@ function novaConfiguracio () { // eslint-disable-line no-unused-vars
 document.addEventListener('DOMContentLoaded', () => {
   // Assegurar que la primera pantalla estigui activa
   canviarPantalla('pantalla1');
-
-  // Connectar botó guia de peu.js amb la funció mostrarGuia
-  document.addEventListener('click', (e) => {
-    if (e.target.id === 'btn-guia' || e.target.closest('#btn-guia')) {
-      mostrarGuia();
-    }
-  });
 });
