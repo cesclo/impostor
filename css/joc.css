@@ -20,6 +20,18 @@
   }
 }
 
+/* Layout: main flex + pantalla sense min-height forçat */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pantalla.activa {
+  flex: 1;
+  min-height: 0;
+}
+
 /* Instrucció destacada */
 #instruccio {
   font-size: 1.4em;
